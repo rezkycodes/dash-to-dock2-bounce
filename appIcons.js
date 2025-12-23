@@ -237,10 +237,20 @@ const DockAbstractAppIcon = GObject.registerClass({
 
         this._previewMenuManager = null;
         this._previewMenu = null;
+        this._previewHoverTimeoutId = 0;
+        
+        // Connect hover events for Windows 11 style preview
+        this.connect('notify::hover', this._onHoverChanged.bind(this));
     }
 
     _onDestroy() {
         super._onDestroy();
+
+        // Cleanup hover preview timeout
+        if (this._previewHoverTimeoutId) {
+            GLib.source_remove(this._previewHoverTimeoutId);
+            this._previewHoverTimeoutId = 0;
+        }
 
         // Cleanup bounce animator
         if (this._bounceAnimator) {
@@ -779,6 +789,50 @@ const DockAbstractAppIcon = GObject.registerClass({
             this._previewMenu.popup();
 
         return false;
+    }
+
+    /**
+     * Windows 11 style hover preview
+     * Auto-show window previews after hovering for configured delay
+     */
+    _onHoverChanged() {
+        // Clear any existing timeout
+        if (this._previewHoverTimeoutId) {
+            GLib.source_remove(this._previewHoverTimeoutId);
+            this._previewHoverTimeoutId = 0;
+        }
+
+        // Check if feature is enabled
+        const previewOnHover = Docking.DockManager.settings.get_boolean('preview-on-hover');
+        if (!previewOnHover) {
+            return;
+        }
+
+        // If hovering and app has windows, schedule preview
+        if (this.hover) {
+            const windows = this.getInterestingWindows();
+            
+            // Only show preview if app has running windows
+            if (windows.length > 0) {
+                const delay = Docking.DockManager.settings.get_int('preview-hover-timeout');
+                
+                this._previewHoverTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, delay, () => {
+                    this._previewHoverTimeoutId = 0;
+                    
+                    // Check if still hovering and preview not already open
+                    if (this.hover && !this._previewMenu?.isOpen) {
+                        this._windowPreviews();
+                    }
+                    
+                    return GLib.SOURCE_REMOVE;
+                });
+            }
+        } else {
+            // Mouse left - close preview if it was auto-opened
+            if (this._previewMenu?.isOpen) {
+                this._previewMenu.close();
+            }
+        }
     }
 
     // Try to do the right thing when attempting to launch a new window of an app. In

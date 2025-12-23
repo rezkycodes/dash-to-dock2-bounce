@@ -279,6 +279,16 @@
       <summary>Open windows preview by default</summary>
       <description>Window previews will show windows by default, rather than hide them behind a drop dowm menu.</description>
     </key>
+    <key type="b" name="preview-on-hover">
+      <default>false</default>
+      <summary>Show window preview on hover</summary>
+      <description>Automatically show window previews when hovering over an app icon (Windows 11 style).</description>
+    </key>
+    <key type="i" name="preview-hover-timeout">
+      <default>2000</default>
+      <summary>Preview hover timeout (ms)</summary>
+      <description>Delay in milliseconds before showing window preview on hover.</description>
+    </key>
     <key type="b" name="show-favorites">
       <default>true</default>
       <summary>Show favorites apps</summary>

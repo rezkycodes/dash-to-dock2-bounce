@@ -2,6 +2,32 @@
 
 All notable changes to Dash to Dock 2 - Bounce Edition will be documented in this file.
 
+## [2.1.0] - 2025-12-23
+
+### Added - Windows 11 Hover Preview! 🪟
+- 🪟 **Windows 11 Style Hover Preview** - Auto-show window thumbnails on hover
+- ⏱️ **Configurable Delay** - Adjust hover timeout (500-5000ms, default 2000ms)
+- 🎛️ **GUI Toggle** - Enable/disable in preferences with switch
+- 🎯 **Smart Detection** - Only shows preview for apps with running windows
+- 🔄 **Auto-close** - Preview closes when mouse leaves icon
+- 🎨 **Seamless Integration** - Works perfectly with all 16 bounce animations
+
+### Technical - Hover Preview Implementation
+- ➕ **Added `preview-on-hover` setting** - Boolean to enable/disable feature
+- ➕ **Added `preview-hover-timeout` setting** - Integer for delay in milliseconds
+- 🔧 **Hover event handler** - `notify::hover` connection in appIcons.js
+- ⏲️ **GLib timeout** - Scheduled preview display after delay
+- 🧹 **Proper cleanup** - Timeout removed on destroy and mouse leave
+- 📋 **Settings UI** - New frame in Settings.ui with switch and spinbutton
+
+### Modified Files
+- `appIcons.js` - Added hover event handlers and preview timeout logic
+- `Settings.ui` - Added preview hover settings frame with switch and delay spinner
+- `prefs.js` - Bound new settings to UI controls
+- `schemas/gschema.xml` - Added preview-on-hover and preview-hover-timeout keys
+
+---
+
 ## [2.0.0] - 2024-12-19
 
 ### Added - 16 Animation Styles! 🎉

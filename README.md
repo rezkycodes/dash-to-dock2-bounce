@@ -8,6 +8,7 @@ Enhanced version of Dash to Dock with **16 macOS-style bounce animations** for G
 ## ✨ Features
 
 - 🎯 **16 Bounce Animation Styles** - Multiple animation variations to choose from
+- 🪟 **Windows 11 Hover Preview** - Auto-show window thumbnails on hover (2 second delay)
 - 🎨 **Customizable in GUI** - Easy selection from GNOME Extensions preferences
 - 🚫 **Anti-Spam Protection** - Debouncing prevents animation bugs
 - 🎛️ **Top-Level Clone Technique** - Icons bounce above all UI elements, never clipped
@@ -34,6 +35,27 @@ Choose from 16 different bounce animations:
 14. **Trampoline (High Jump)** - Super high bounce like a trampoline
 15. **Twist (Spin)** - 720° rotation with bounce
 16. **Drop (Fall In)** - Drop from above with bounce
+
+## 🪟 Windows 11 Style Hover Preview
+
+**NEW FEATURE!** Auto-show window previews when hovering over app icons - just like Windows 11 taskbar!
+
+### How it Works:
+1. Hover your mouse over any app icon with open windows
+2. Wait for configured delay (default 2 seconds)
+3. Window thumbnail previews automatically appear above the icon
+4. Move mouse away to close the preview
+
+### Configuration:
+- **Enable/Disable**: Toggle in extension preferences
+- **Hover Delay**: Adjust from 500ms to 5000ms (default: 2000ms / 2 seconds)
+- **Seamless Integration**: Works with all 16 bounce animations!
+
+### Benefits:
+- ✅ **No right-click needed** - Automatic on hover
+- ✅ **Quick window switching** - See all windows before clicking
+- ✅ **Familiar UX** - Works like Windows 11 taskbar
+- ✅ **Configurable delay** - Adjust to your preference
 
 ## 🎯 Technical Highlights
 

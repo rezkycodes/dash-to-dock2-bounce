@@ -808,6 +808,19 @@ const DockSettings = GObject.registerClass({
             this._settings.set_enum('click-animation-style', widget.get_active());
         });
 
+        // Bind window preview on hover settings (Windows 11 style)
+        const previewHoverSwitch = this._builder.get_object('preview_hover_switch');
+        this._settings.bind('preview-on-hover',
+            previewHoverSwitch,
+            'active',
+            Gio.SettingsBindFlags.DEFAULT);
+
+        const previewTimeoutSpin = this._builder.get_object('preview_timeout_spin');
+        this._settings.bind('preview-hover-timeout',
+            previewTimeoutSpin,
+            'value',
+            Gio.SettingsBindFlags.DEFAULT);
+
         // Create dialog for number overlay options
         this._builder.get_object('overlay_button').connect('clicked', () => {
             const dialog = new Gtk.Dialog({
